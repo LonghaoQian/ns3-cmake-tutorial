@@ -56,12 +56,20 @@ cd ns-allinone-3.33/ns-3.33/
 ./waf
 # to check whether installation was a success
 ./waf --run hello-simulator
-
+```
+#### the following steps are optional if you need a visualization tool
+```
 # navigate to netanim dir.
+cd
 cd ns-allinone-3.33/netanim-3.108/
 # configure the build
-make clean
+(skip when build for the first time) make clean
 # compile the build
+# if qmake is not installed, run
+sudo apt install qtchooser
+# if qt is not installed run
+sudo apt-get install qt5-default
+# make the animation tool
 qmake NetAnim.pro
 # build netanim installation
 make
@@ -72,12 +80,46 @@ make
 - ubuntu 16.04
 
 ### 1.3 Library and header file directory
+- find the build directory
+
+example: /home/${your_user_name}/ns-allinone-3.33/ns-3.33/build/
+
+- find the directory containing the dynamic linked libraries
+
+example: /home/${your_user_name}/ns-allinone-3.33/ns-3.33/build/libs/
+
+- find the directory containing the header files
+
+example: /home/${your_user_name}/ns-allinone-3.33/ns-3.33/build/ns3/
 
 ### 1.4 Add shared ns3 library directory to .bashrc
 
+```
+cd 
+vi .bashrc
+i
+(scroll down to the bottom of the file and add the following)
+export LD_LIBRARY_PATH=${the directory containing the dynamic linked libraries}:$LD_LIBRARY_PATH
+(example: export LD_LIBRARY_PATH=/home/longhao/ns-allinone-3.33/ns-3.33/build/lib:$LD_LIBRARY_PATH)
+:wq
+source .bashrc
+```
+
 ### 1.5 Linux subsystem on Windows
 
-[enable wsl](https://www.ssl.com/how-to/enable-linux-subsystem-install-ubuntu-windows-10/)
+- [how to enable wsl](https://www.ssl.com/how-to/enable-linux-subsystem-install-ubuntu-windows-10/)
+
+- First check the version of the windows
+
+- Search “Turn Windows features on and off” . Check “Windows Subsystem for Linux” and “Virtual Machine Platform”. After applying the change, you need to restart the computer.
+
+- Open Microsoft store, search and install an ubuntu distribution
+
+- Now you should be able to run the virtural machine by double clicking the icon
+
+
+#### trouble shooting:
+- update wsl 2
 
 ## 2. Eigen library
 
@@ -89,7 +131,7 @@ make
 - Step 1: Clone the Eigen source code
 ```
 cd ${your_source_dir}
-git clone https://github.com/eigenteam/eigen-git-mirror.git
+git clone https://github.com/LonghaoQian/ns3-cmake-tutorial
 ```
 - Step 2: Build and install Eigen
 
@@ -107,9 +149,29 @@ sudo make install
 - [vscode remote development](https://code.visualstudio.com/docs/remote/wsl)
 - [install vscode remote plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
 
-### 3.2 Set library path and header file path
+### 3.2 Clone and open the project
+```
+cd 
+mkdir source
+cd source
+git clone https://github.com/LonghaoQian/ns3-cmake-tutorial/edit/master/README.md
+cd source/ns3-cmake-tutorial
+code .
+```
+### 3.3 Set library path and header file path
 
-### 3.3 Resolve include directory error
+- open NSlibs.cmake
+- edit the command: set(NS3_PATH ${directory containing the dynamic linked libraries **RELATIVE TO THE PROJECT SOURCE DIRECTORY** }) 
+- edit the command: set(NS3_HEADER_PATH ${ build directory **RELATIVE TO THE PROJECT SOURCE DIRECTORY** })
+- example: set(NS3_PATH ../../ns-allinone-3.33/ns-3.33/build/lib/) and set(NS3_HEADER_PATH ../../ns-allinone-3.33/ns-3.33/build/)
+- close the save the file
+
+### 3.4 Resolve include directory error
+
+- ns3 header files are not stored in the project directory so we need to add the header folder to vscode project configuration
+- in vscode, press F1 to call the command line and type: `C/C++: Edit Configurations (UI)`
+- add the ns3 build path to the include path
+- the errors of the header files should go off
 
 ## 4. Simulation Example
 
