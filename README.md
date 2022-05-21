@@ -113,13 +113,30 @@ source .bashrc
 
 - Search “Turn Windows features on and off” . Check “Windows Subsystem for Linux” and “Virtual Machine Platform”. After applying the change, you need to restart the computer.
 
-- Open Microsoft store, search and install an ubuntu distribution
+<p align="center">
+  <img width="553" height="593" src="https://github.com/LonghaoQian/ns3-cmake-tutorial/blob/master/image/wsl_1.PNG">
+</p>
+
+- Open Microsoft store, search and install a ubuntu distribution
+
+<p align="center">
+  <img width="870" height="727" src="https://github.com/LonghaoQian/ns3-cmake-tutorial/blob/master/image/wsl_2.PNG">
+</p>
+
 
 - Now you should be able to run the virtural machine by double clicking the icon
 
+<p align="center">
+  <img width="80" height="100" src="https://github.com/LonghaoQian/ns3-cmake-tutorial/blob/master/image/wsl_3.png">
+</p>
+
+- You need to set the user name and password upon first login
+<p align="center">
+  <img width="978" height="515" src="https://github.com/LonghaoQian/ns3-cmake-tutorial/blob/master/image/wsl_4.PNG">
+</p>
 
 #### trouble shooting:
-- update wsl 2
+- update wsl to wsl 2
 
 ## 2. Eigen library
 
@@ -142,6 +159,12 @@ cd build
 cmake ../
 sudo make install
 ```
+
+- if you see the following, the Eigen lib is correctly installed
+<p align="center">
+  <img width="493" height="257" src="https://github.com/LonghaoQian/ns3-cmake-tutorial/blob/master/image/eigen_1.PNG">
+</p>
+
 ## 3. Build project
 
 ### 3.1 Enable vscode remote development
@@ -169,8 +192,18 @@ code .
 ### 3.4 Resolve include directory error
 
 - ns3 header files are not stored in the project directory so we need to add the header folder to vscode project configuration
+- 
+<p align="center">
+  <img width="318" height="140" src="https://github.com/LonghaoQian/ns3-cmake-tutorial/blob/master/image/vscode_1.PNG">
+</p>
+
 - in vscode, press F1 to call the command line and type: `C/C++: Edit Configurations (UI)`
 - add the ns3 build path to the include path
+
+<p align="center">
+  <img width="823" height="235" src="https://github.com/LonghaoQian/ns3-cmake-tutorial/blob/master/image/vscode_2.PNG">
+</p>
+
 - the errors of the header files should go off
 
 ## 4. Simulation Example
