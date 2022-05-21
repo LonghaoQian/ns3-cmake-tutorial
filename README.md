@@ -206,6 +206,15 @@ code .
 
 - the errors of the header files should go off
 
+### 3.5 Build the project
+```
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+```
+
+```
+cmake --build build
+```
+
 ## 4. Simulation Example
 
 ### 4.1 Point to point communication
